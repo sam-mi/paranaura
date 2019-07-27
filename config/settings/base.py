@@ -12,7 +12,7 @@ import environ
 
 SITE_NAME = 'Paranuara Challenge'
 SCHEME = "https://"
-SITE_DOMAIN = "paranaura.com"
+SITE_DOMAIN = "paranuara.com"
 SITE_URL = '{}{}'.format(SCHEME,SITE_DOMAIN)
 SITE_DESCRIPTION = "An API for interplanatory colony information transfer and reporting"
 
@@ -22,7 +22,7 @@ COMPANY_LOGO = '/static/images/logo.png'
 AUTHOR = "Pure Creative"
 AUTHOR_URL = "https://purecreative.digital"
 
-ROOT_DIR = environ.Path(__file__) - 3  # (paranuara_challenge/config/settings/base.py - 3 = paranaura.com/paranuara_challenge/)
+ROOT_DIR = environ.Path(__file__) - 3  # (paranuara_challenge/config/settings/base.py - 3 = paranuara.com/paranuara_challenge/)
 APPS_DIR = ROOT_DIR.path('paranuara_challenge')
 BASE_DIR = str(ROOT_DIR.path())
 
@@ -173,7 +173,7 @@ MANAGERS = ADMINS
 # Uses django-environ to accept uri format
 # See: https://django-environ.readthedocs.io/en/latest/#supported-types
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///paranuara_challenge'),
+    'default': env.db('DATABASE_URL', default='postgres:///paranuara'),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
