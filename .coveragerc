@@ -1,0 +1,5 @@
+[run]
+include = paranuara_challenge/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin

@@ -1,0 +1,14 @@
+[Unit]
+Description=gunicorn daemon for paranaura.com on EOS
+After=network.target
+
+[Service]
+User=django
+Group=www-data
+Environment=DJANGO_DEBUG=False
+WorkingDirectory=/var/www/paranaura.com/paranuara_challenge
+ExecStart=/var/www/envs/paranuara_challenge/bin/gunicorn --workers 3 --bind 127.0.0.1:8001 config.wsgi:application --log-file=/var/www/paranaura.com/logs/gunicorn.log
+
+
+[Install]
+WantedBy=multi-user.target
