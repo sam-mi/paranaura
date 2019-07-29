@@ -106,7 +106,9 @@ LOCAL_APPS = [
     # Apps specific for Paranuara Challenge go here.
     'paranuara_challenge.legal',
     'paranuara_challenge.users',
-    
+    'paranuara_challenge.api',
+    'paranuara_challenge.paranuara',
+
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
