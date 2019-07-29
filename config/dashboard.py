@@ -83,7 +83,6 @@ class CustomIndexDashboard(Dashboard):
                     title='Files',
                     models=(
                         'paranuara_challenge.resources.*',
-                        'django_file_form.*',
                     )
                 ),
                 modules.AppList(
@@ -127,25 +126,6 @@ class CustomIndexDashboard(Dashboard):
                     models=(
                         'allauth.*',
                         'rest_framework.*',
-                    )
-                ),
-                modules.AppList(
-                    title='Mailing Lists',
-                    models=(
-                        'django_common.mailing_list.*',
-                    )
-                ),
-                # modules.AppList(
-                #     title='Invitations',
-                #     models=(
-                #         'paranuara_challenge.vsinvitations.*',
-                #         'invitations.*',
-                #     )
-                # ),
-                modules.AppList(
-                    title='File Resources',
-                    models=(
-                        'django_common.file.resources.*',
                     )
                 ),
             ]

@@ -10,11 +10,11 @@ User = get_user_model()
 def update_user(sender, **kwargs):
     user = kwargs['instance']
     if kwargs['created']:
-        
+        pass
 
         
     else:
         # update user profile on user save
-        user.profile.save()
+        pass
 
 post_save.connect(update_user, sender=User)

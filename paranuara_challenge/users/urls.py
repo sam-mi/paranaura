@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 
 from config.urls import router
-from .views import UserViewSet, GroupViewSet, UserProfileViewSet
+from .views import UserViewSet, GroupViewSet
 
 
 from . import views

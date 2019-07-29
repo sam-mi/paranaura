@@ -7,29 +7,6 @@ from .models import User
 
 
 
-from .models import UserProfile
-
-class UserProfileInline(admin.TabularInline):
-    model = UserProfile
-    exclude = (
-        
-        
-    )
-    readonly_fields = (
-        'terms', 'privacy', 'fairplay',
-        
-        'welcome',
-        
-    )
-    extra = 0
-
-
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    pass
-
-
-
 class MyUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
@@ -63,9 +40,8 @@ class UserAdmin(AuthUserAdmin):
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-    ) + AuthUserAdmin.fieldsets
+    )
     list_display = ['username', 'email', 'name', 'is_staff', 'last_login']
     search_fields = ['name']
     
-    inlines = [UserProfileInline]
-    
+

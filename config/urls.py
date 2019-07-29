@@ -28,29 +28,12 @@ urlpatterns = [
     url(r'^google49e555173b47eaf1.html',
         TemplateView.as_view(template_name='google49e555173b47eaf1.html')),
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-    # Project Specific URLs go here:
-
-
 
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
-
-    url(r'', include('legal.urls')),
 
     url(r'^favicon.ico$', RedirectView.as_view(
         url=staticfiles_storage.url('icons/favicons/favicon.ico'),

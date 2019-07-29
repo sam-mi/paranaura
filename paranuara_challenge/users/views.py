@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -5,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from allauth.account.views import EmailView
 
 
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -14,11 +15,7 @@ from django.contrib.auth.models import Group
 from .serializers import UserSerializer, GroupSerializer, PasswordSerializer
 from .permissions import IsAdminOrIsSelf
 
-
-
-
-
-from .models import User
+User = get_user_model()
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -79,8 +76,9 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    @detail_route(
+    @action(
         methods=['post'],
+        detail=True,
         serializer_class=PasswordSerializer,
         permission_classes=[IsAdminOrIsSelf])
     def update_password(self, request, pk=None):

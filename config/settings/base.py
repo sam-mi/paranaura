@@ -94,19 +94,9 @@ THIRD_PARTY_APPS = [
     'mathfilters',
 
     # forms
-    'django_file_form',
-    'django_file_form.ajaxuploader',
 
     'genericadmin',  # admin help for content_types
-    'django_common',
-    
-    
-    
-    
-    
-    
-    'django_social_share',
-    'colorful',
+
     # 'django_common.publishing',
     
 ]
@@ -132,9 +122,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    
-    'django_common.middleware.ThreadLocalMiddleware',
 
 ]
 
@@ -269,7 +256,7 @@ if os.path.exists(STATIC_BOWER_COMPONENTS_DIR):
     )
 
 STATICFILES_DIRS += (
-    os.path.join(str(ROOT_DIR), 'node_modules', 'popper.js', 'dist'),
+    os.path.join(str(ROOT_DIR), 'node_modules', ), # 'popper.js', 'dist'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -436,7 +423,6 @@ DATETIMEPICKER_INPUT_FORMATS = (
 #   PROJECT SETTINGS
 # ----------------------------------------------------------
 
-# DASHBOARD_URL = ''
 
 
 
