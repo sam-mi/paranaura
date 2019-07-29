@@ -7,6 +7,36 @@ An API for interplanatory colony information transfer and reporting
      :target: https://github.com/pydanny/cookiecutter-django/
      :alt: Built with Cookiecutter Django
 
+Installing
+----------
+
+* Install Requires
+    * Python 3
+    * Virtualenv & Virtualenvwrapper installed
+    * Yarn
+    * Postgresql 10+
+
+* Run the following commands ::
+
+    $ git clone git@github.com:sam-mi/paranaura.git
+    $ mkvirtualenv paranuara -p python3
+    $ pip install -r requirements/local.py
+    $ yarn
+    $ createdb paranuara
+    $ ./manage.py migrate
+    $ ./manage.py createsuperuser --email admin@paranuara.com --username admin
+    $ ./manage.py test
+    $ ./manage.py runserver
+
+
+API
+---
+
+* URLS ::
+
+    /api/v1/
+    /api/v1/companies/
+
 
 Settings
 --------
