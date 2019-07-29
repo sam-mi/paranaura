@@ -69,7 +69,6 @@ class CustomMenu(Menu):
                 models=(
                     # 'paranuara_challenge.tracker.*',
                     # 'paranuara_challenge.resources.*',
-                    'django_file_form.*',
                     'django.contrib.*',
                 )
             )
