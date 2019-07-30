@@ -11,7 +11,8 @@ from .base import *  # noqa
 # ------------------------------------------------------------------------------
 # Turn debug off so tests run faster
 DEBUG = False
-TEMPLATES[0]['OPTIONS']['debug'] = False
+TEMPLATES[0]['OPTIONS']['debug'] = True
+
 
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -57,5 +58,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
     ['django.template.loaders.cached.Loader', [
         'django.template.loaders.filesystem.Loader',
         'django.template.loaders.app_directories.Loader',
+        'admin_tools.template_loaders.Loader',
     ], ],
 ]
