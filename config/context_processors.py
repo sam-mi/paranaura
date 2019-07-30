@@ -18,8 +18,8 @@ def site_context(request):
 
         'AUTHOR': settings.AUTHOR,
         'VERSION': __version__,
-        'DASHBOARD_URL': settings.DASHBOARD_URL,
+        # 'DASHBOARD_URL': settings.DASHBOARD_URL,
         'DEBUG': settings.DEBUG,
         'NOW': timezone.now(),
-        'DATETIME_INPUT_FORMAT': 'F j, Y, g:i A', # JS
+        # 'DATETIME_INPUT_FORMAT': 'F j, Y, g:i A', # JS
     }
