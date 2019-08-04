@@ -48,7 +48,7 @@ urlpatterns += [
     
 
     
-    url(r'^api/v1/', include(router.urls)),
+    url(r'^api/', include('paranuara_challenge.api.urls')),
 
     
 

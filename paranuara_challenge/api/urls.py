@@ -2,16 +2,11 @@ from django.urls import path, include
 from rest_framework import routers
 
 from config.urls import router
-# router.register(r'users', views.UserViewSet)
-# router.register(r'groups', views.GroupViewSet)
-from paranuara_challenge.paranuara import views as paranuara_views
-
-router.register(r'companies', paranuara_views.CompanyViewSet)
-router.register(r'food', paranuara_views.FoodViewSet)
-router.register(r'people', paranuara_views.PersonViewSet)
+from paranuara_challenge.paranuara import urls
 
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('', include(urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
