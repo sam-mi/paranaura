@@ -1,10 +1,14 @@
 import uuid
 
+from django.contrib.postgres.fields import JSONField
 from django.db import models
+from django.db.models import QuerySet
 from django.utils import timezone
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
 from taggit.managers import TaggableManager
+
+from paranuara_challenge.paranuara.helpers import FOOD_CLASSIFICATION_CHOICES
 
 
 class Company(TimeStampedModel):
@@ -27,6 +31,11 @@ class Food(TimeStampedModel):
     """
     Food available on Paranuara
     """
+    classification = models.CharField(
+        max_length=1,
+        choices=FOOD_CLASSIFICATION_CHOICES,
+        default=FOOD_CLASSIFICATION_CHOICES.unknown
+    )
 
     name = models.CharField(
         max_length=55,
@@ -56,15 +65,12 @@ class Person(TimeStampedModel):
     #### REQUIRED ############################################
 
     guid = models.UUIDField(
-        primary_key=True,
+        primary_key=False, # dammit taggit!
         default=uuid.uuid4
     )
     _id = models.CharField(
         max_length=24,
         help_text="External System ID"
-    )
-    index = models.PositiveIntegerField(
-        help_text="External System Index"
     )
     name = models.CharField(
         max_length=255,
@@ -82,6 +88,12 @@ class Person(TimeStampedModel):
     )
     friends = models.ManyToManyField(
         "Person",
+        blank=True
+    )
+    _friend_cache = JSONField(
+        default=dict,
+        help_text="Storage for friend ids if related friend has "
+                  "not been created yet",
         blank=True
     )
     food = models.ManyToManyField(
@@ -104,7 +116,9 @@ class Person(TimeStampedModel):
         choices=GENDER_CHOICES,
         default=GENDER_CHOICES.unknown
     )
-    age = models.PositiveSmallIntegerField()
+    age = models.PositiveSmallIntegerField(
+        blank=True,
+    )
     picture = models.CharField(
         max_length=255,
         help_text="URL for picture",
@@ -134,6 +148,21 @@ class Person(TimeStampedModel):
         blank=True
     )
 
+    def update_friends(self) -> QuerySet:
+        """
+        Checks whether the friends in the `_friend_cache` exists and
+        assigns them to `friends` if they do
+        :return: updated friends
+        """
+        friend_ids = [
+            item['id'] for item in self._friend_cache
+        ]
+        friends = Person.objects.filter(pk__in=friend_ids)
+        self.friends.add(*friends)
+        return self.friends.all()
+
+    def get_balance(self) -> str:
+        return f'${str(self.balance)}'
 
     tags = TaggableManager(blank=True)
 
@@ -142,5 +171,4 @@ class Person(TimeStampedModel):
         return self.name
 
     class Meta:
-        ordering = ('-index',)
-        unique_together = ['name', 'email']
+        ordering = ('-pk',)
