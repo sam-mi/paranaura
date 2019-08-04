@@ -98,7 +98,7 @@ THIRD_PARTY_APPS = [
     'genericadmin',  # admin help for content_types
 
     # 'django_common.publishing',
-    
+    'taggit',
 ]
 
 LOCAL_APPS = [
@@ -378,6 +378,8 @@ ADMIN_TOOLS_THEMING_CSS = 'css/dashboard/theme.css'
 
 
 DATETIME_INPUT_FORMATS = [
+    '%Y-%m-%dT%H:%M:%S %z',  # 2016-07-13T12:29:07 -10:00 (API)
+
     '%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
     '%Y-%m-%d %H:%M:%S.%f',  # '2006-10-25 14:30:59.000200'
     '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
@@ -395,6 +397,7 @@ DATETIME_INPUT_FORMATS = [
 
     '%d.%m.%Y. %H:%M',       # Wagtail
 
+    'iso-8601',
 ]
 
 DATE_INPUT_FORMATS = [
@@ -428,4 +431,13 @@ DATETIMEPICKER_INPUT_FORMATS = (
 
 
 
+REST_FRAMEWORK = {
 
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'COERCE_DECIMAL_TO_STRING': False,
+    'DATETIME_INPUT_FORMATS': [
+
+        '%Y-%m-%dT%H:%M:%S %z',  # 2016-07-13T12:29:07 -10:00 (API)
+        'iso-8601',
+    ]
+}
