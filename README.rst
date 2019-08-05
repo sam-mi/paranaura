@@ -18,8 +18,9 @@ Installing
 
 * Run the following commands ::
 
-    $ git clone git@github.com:sam-mi/paranaura.git
-    $ cp paranuara_challenge/config/settings/local.tmpl.py paranuara_challenge/config/settings/local.py
+    $ git clone git@github.com:sam-mi/paranuara.git
+    $ cd paranuara
+    $ cp config/settings/local.tmpl.py config/settings/local.py
     $ mkvirtualenv paranuara -p python3
     $ pip install -r requirements/local.txt
     $ yarn (or npm install)
@@ -34,7 +35,7 @@ Installing
     * Load the list of companies at /api/companies/
     * Load the list of people at /api/people/
     * View a company and its employees at /api/companies/{int}/
-    * Compare friends at /api/friends/{int}/{int}/
+    * Compare friends at /api/friends/{int:id}/{int:friend}/
 
 API
 ---
@@ -48,8 +49,17 @@ API
     /api/people/{id}/
     /api/food/
     /api/food/{id}/
-    /api/friends/{int:id}/{ing:friend}/
+    /api/friends/{int:id}/{int:friend}/
 
+
+Possible Issues
+---------------
+
+ - npm or yarn are required, node-sass can cause issues if not working correctly (e.g. after a brew update)
+ - coverage is required to run from the virtualenv, it may break if running via a system install
+ - on certain systems pythons strftime can behave inconsistently showing a datetime not matching when it should
+
+If any of these issues occur, please let me know so I can help solve them!
 
 Settings
 --------
