@@ -19,23 +19,36 @@ Installing
 * Run the following commands ::
 
     $ git clone git@github.com:sam-mi/paranaura.git
+    $ cp paranuara_challenge/config/settings/local.tmpl.py paranuara_challenge/config/settings/local.py
     $ mkvirtualenv paranuara -p python3
-    $ pip install -r requirements/local.py
-    $ yarn
+    $ pip install -r requirements/local.txt
+    $ yarn (or npm install)
     $ createdb paranuara
     $ ./manage.py migrate
     $ ./manage.py createsuperuser --email admin@paranuara.com --username admin
-    $ ./manage.py test
+    $ coverage run ./manage.py test
+    $ coverage report -m
     $ ./manage.py runserver
 
+* Navigate to 127.0.0.1:8000/api/
+    * Load the list of companies at /api/companies/
+    * Load the list of people at /api/people/
+    * View a company and its employees at /api/companies/{int}/
+    * Compare friends at /api/friends/{int}/{int}/
 
 API
 ---
 
-* URLS ::
+* ENDPOINTS ::
 
-    /api/v1/
-    /api/v1/companies/
+    /api/
+    /api/companies/
+    /api/companies/{id}/
+    /api/people/
+    /api/people/{id}/
+    /api/food/
+    /api/food/{id}/
+    /api/friends/{int:id}/{ing:friend}/
 
 
 Settings
