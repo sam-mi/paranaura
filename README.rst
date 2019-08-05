@@ -55,6 +55,7 @@ API
 Possible Issues
 ---------------
 
+ - company ids count from 0 while person.company_id counts from 1, this may cause problems (i.e. there is no company_id with id 100, however it is referenced 10x in the person.json - the api will throw a 404 with a helpful message).
  - npm or yarn are required, node-sass can cause issues if not working correctly (e.g. after a brew update)
  - coverage is required to run from the virtualenv, it may break if running via a system install
  - on certain systems pythons strftime can behave inconsistently showing a datetime not matching when it should
