@@ -364,4 +364,4 @@ paranuara_challenge/media/
 
 
 # Local dev settings
-config/settings/local.py
+#config/settings/local.py
