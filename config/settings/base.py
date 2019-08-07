@@ -16,11 +16,6 @@ SITE_DOMAIN = "paranuara.com"
 SITE_URL = '{}{}'.format(SCHEME,SITE_DOMAIN)
 SITE_DESCRIPTION = "An API for interplanatory colony information transfer and reporting"
 
-COMPANY_ADDRESS = 'Sydney, Australia'
-COMPANY_LOGO = '/static/images/logo.png'
-
-AUTHOR = "Pure Creative"
-AUTHOR_URL = "https://purecreative.digital"
 
 ROOT_DIR = environ.Path(__file__) - 3  # (paranuara_challenge/config/settings/base.py - 3 = paranuara.com/paranuara_challenge/)
 APPS_DIR = ROOT_DIR.path('paranuara_challenge')
@@ -51,13 +46,6 @@ if READ_DOT_ENV_FILE:
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
 
-    # Admin theming
-    'admin_tools',
-    'admin_tools.theming',
-    'admin_tools.menu',
-    'admin_tools.dashboard',
-    
-
     # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,48 +55,19 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Useful template tags:
-    'django.contrib.humanize',
-
-    # Admin
-    'flat',
-    'django.contrib.admin',
 ]
 THIRD_PARTY_APPS = [
-    'crispy_forms',  # Form layouts
-    'allauth',  # registration
-    'allauth.account',  # registration
-    'allauth.socialaccount',  # registration
-    
-
-    'braces',
-    'guardian',  # object permissions
-    
-    # django activity stream (following etc)
 
     
     'rest_framework',
     'rest_framework.authtoken',
 
-    # templates
-    'mathfilters',
-
-    # forms
-
-    'genericadmin',  # admin help for content_types
-
-    # 'django_common.publishing',
     'taggit',
 ]
 
 LOCAL_APPS = [
 
-    # Apps specific for Paranuara Challenge go here.
-    'paranuara_challenge.legal',
-    'paranuara_challenge.users',
-    'paranuara_challenge.api',
     'paranuara_challenge.paranuara',
-
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -132,7 +91,6 @@ MIDDLEWARE = [
 MIGRATION_MODULES = {
     'sites': 'paranuara_challenge.contrib.sites.migrations',
     
-    'fileresources': 'paranuara_challenge.common_migrations',
 }
 
 # FIXTURE CONFIGURATION
@@ -223,18 +181,10 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 
-                'config.context_processors.site_context',
-                
             ],
         },
     },
 ]
-
-# See: http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
-
 
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -257,9 +207,9 @@ if os.path.exists(STATIC_BOWER_COMPONENTS_DIR):
         STATIC_BOWER_COMPONENTS_DIR,
     )
 
-STATICFILES_DIRS += (
-    os.path.join(str(ROOT_DIR), 'node_modules', ), # 'popper.js', 'dist'),
-)
+# STATICFILES_DIRS += (
+#     os.path.join(str(ROOT_DIR), 'node_modules', ), # 'popper.js', 'dist'),
+# )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
@@ -316,65 +266,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'guardian.backends.ObjectPermissionBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
-# SOCIALACCOUNT_PROVIDERS = {
-#     'github': {
-#         'SCOPE': [
-#             'user',
-#             'repo',
-#             'read:org',
-#         ],
-#     }
-# }
-
-# Some really nice defaults
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_USERNAME_REQUIRED = True
-
-ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = env.bool('DJANGO_ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION', False)
-ACCOUNT_ADAPTER = 'paranuara_challenge.users.adapters.AccountAdapter'
-SOCIALACCOUNT_ADAPTER = 'paranuara_challenge.users.adapters.SocialAccountAdapter'
-
-# Custom user app defaults
-# Select the correct user model
-AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:redirect'
-LOGIN_URL = 'account_login'
-
-########### INVITATIONS
-
-INVITATIONS_ADAPTER = 'invitations.models.InvitationsAdapter'
-
-INVITATIONS_INVITATION_ONLY=env.bool(
-    'INVITATIONS_INVITATION_ONLY', default=False
-)
-INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP=env.bool(
-    'INVITATIONS_ACCEPT_INVITE_AFTER_SIGNUP', default=False
-)
 
 # SLUGLIFIER
 AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
-
-
-
-
-
-
-# Location of root django.contrib.admin URL, use {% url 'admin:index' %}
-ADMIN_URL = r'^admin/'
-
-########### ADMIN DASHBOARD
-
-ADMIN_TOOLS_INDEX_DASHBOARD = 'config.dashboard.CustomIndexDashboard'
-ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'config.dashboard.CustomAppIndexDashboard'
-ADMIN_TOOLS_MENU = 'config.menu.CustomMenu'
-ADMIN_TOOLS_THEMING_CSS = 'css/dashboard/theme.css'
 
 
 DATETIME_INPUT_FORMATS = [

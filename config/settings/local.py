@@ -14,7 +14,12 @@ from .base import *  # noqa
 # DEBUG
 # ------------------------------------------------------------------------------
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
-TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+TEMPLATES[0]['OPTIONS']['debug'] = True
+TEMPLATES[0]['OPTIONS']['loaders'] = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'admin_tools.template_loaders.Loader',
+]
 
 # SECRET CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -62,23 +67,6 @@ INSTALLED_APPS += ['django_extensions', ]
 # TESTING
 # ------------------------------------------------------------------------------
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
-
-# Your local stuff: Below this line define 3rd party library settings
-# ------------------------------------------------------------------------------
-
-# AWS
-
-AWS_ACCESS_KEY_ID=''
-AWS_SECRET_ACCESS_KEY=''
-AWS_STORAGE_BUCKET_NAME='paranuara_challenge-test'
-
-INSTALLED_APPS += ['storages', ]
-
-MEDIA_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-COMPRESS_ENABLED=False
-COMPRESS_OFFLINE=False
 
 
 DEBUG_TOOLBAR_PANELS = [
