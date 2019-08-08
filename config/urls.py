@@ -1,70 +1,33 @@
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
-from django.contrib import admin
-from django.contrib.staticfiles.storage import staticfiles_storage
-from django.views.generic import TemplateView, RedirectView
-from django.views import defaults as default_views
+from django.urls import path
 
 
 from rest_framework import routers
 
+from paranuara_challenge.paranuara import views
 
 router = routers.DefaultRouter()
 
-admin.site.site_header = "Paranuara Challenge"
+router.register(r'companies', views.CompanyViewSet)
+router.register(r'food', views.FoodViewSet)
+router.register(r'people', views.PersonViewSet)
 
 urlpatterns = [
 
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    # Django Admin, use {% url 'admin:index' %}
-    url(settings.ADMIN_URL, admin.site.urls),
-    url(r'^admin_tools/', include('admin_tools.urls')),
+    # API URLS
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    # User management
-    url(r'^users/', include(('paranuara_challenge.users.urls', 'users'), namespace='users')),
-    url(r'^accounts/', include('allauth.urls')),
-
-    url(r'^google49e555173b47eaf1.html',
-        TemplateView.as_view(template_name='google49e555173b47eaf1.html')),
-
-
-
+    # FRIENDS
+    path('api/friends/<int:pk>/<int:friend>/', views.CommonFriendsViewSet.as_view({'get': 'retrieve'}), name='friends'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += [
-
-    url(r'^favicon.ico$', RedirectView.as_view(
-        url=staticfiles_storage.url('icons/favicons/favicon.ico'),
-        permanent=True),
-        name="favicon"
-        ),
-    url(r'^robots.txt$', RedirectView.as_view(
-        url=staticfiles_storage.url('robots.txt'),
-        permanent=True),
-        name="robots_txt"
-        ),
-    
-
-    
-    url(r'^api/', include('paranuara_challenge.api.urls')),
-
-    
-
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
-]
 
 if settings.DEBUG:
-    # This allows the error pages to be debugged during development, just visit
-    # these url in browser to see how these error pages look like.
-    urlpatterns += [
-        url(r'^400/$', default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
-        url(r'^403/$', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
-        url(r'^404/$', default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
-        url(r'^500/$', default_views.server_error),
-    ]
+
     if 'debug_toolbar' in settings.INSTALLED_APPS:
         import debug_toolbar
         urlpatterns = [
